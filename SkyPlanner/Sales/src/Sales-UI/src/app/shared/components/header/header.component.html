@@ -1,0 +1,8 @@
+<h1 class="h1">{{ title }}</h1>
+<ng-container *ngIf="headerService.subHeader$ | async as subText">
+    <div class="sub-header">
+        <a [routerLink]="['/accounts']" class="h2"
+            ><h2 class="h2">{{ subText }}</h2>
+        </a>
+    </div>
+</ng-container>

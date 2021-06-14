@@ -1,0 +1,15 @@
+products {
+    > div > .mat-card {
+        max-height: calc(100vh - 162px);
+        height: calc(100vh - 162px);
+        min-height: calc(100vh - 162px);
+        overflow: auto;
+    }
+    margin: 1em;
+    product {
+        width: 100%;
+    }
+    .filter-product {
+        width: 100%;
+    }
+}

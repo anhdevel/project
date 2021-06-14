@@ -1,0 +1,44 @@
+<div fxLayout="column" fxLayoutAlign="center  center">
+    <mat-card>
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon class="big-green">check_circle</mat-icon>
+                </div>
+
+                <div
+                    class="box"
+                    fxLayout="column"
+                    fxLayoutAlign="center stretch"
+                >
+                    <h1>Order Receive.</h1>
+                    <h1>Thank you for your Order.</h1>
+                </div>
+                <mat-card-actions>
+                    <div
+                        fxLayout="row"
+                        fxLayoutAlign="center stretch"
+                        fxLayoutGap="6em"
+                    >
+                        <button
+                            mat-fab
+                            color="primary"
+                            matTooltip="Go to Accounts Page"
+                            (click)="navigate('accounts')"
+                        >
+                            <mat-icon>supervisor_account</mat-icon>
+                        </button>
+                        <button
+                            mat-fab
+                            color="primary"
+                            matTooltip="Go to New Order"
+                            (click)="navigate('order/new')"
+                        >
+                            <mat-icon>shopping_cart</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-actions>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,17 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+    <ng-container *ngIf="account$ | async as account">
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex="40">
+                <products></products>
+            </div>
+            <div
+                class="build-order-margin"
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                fxFlex
+            >
+                <build-order [account]="account$ | async"></build-order>
+            </div>
+        </div>
+    </ng-container>
+</div>

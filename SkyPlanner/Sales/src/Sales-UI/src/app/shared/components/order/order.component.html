@@ -1,0 +1,48 @@
+<expansion-panel
+    [parent]="orderForm"
+    [content]="productItems"
+    title="{{ title }}"
+    [description]="OrderResume"
+    [resume]="footerResume"
+    [expandByDefault]="expandByDefault"
+></expansion-panel>
+<ng-template #productItems let-parent="parent">
+    <mat-divider [inset]="false"></mat-divider>
+    <order-list-item
+        [orderForm]="parent"
+        [canDelete]="editable"
+    ></order-list-item>
+</ng-template>
+<ng-template #OrderResume let-parent="parent">
+    <div fxLayout="column" fxLayoutAlign="center stretch" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2em">
+            <div>
+                Total:
+                {{ getValue('total') | currency: 'USD' }}
+            </div>
+            <div>
+                {{ getValue('createDate') | date: 'medium' }}
+            </div>
+            <mat-icon color="primary">shopping_bag</mat-icon>
+        </div>
+    </div>
+</ng-template>
+<ng-template #footerResume let-parent="parent">
+    <div fxLayout="column" fxLayoutAlign="end end" class="summary">
+        <div fxLayout="column" fxLayoutAlign="center end" fxLayoutGap="10px">
+            <div>
+                <span>SubTotal:</span>
+                {{ getValue('subTotal') | currency: 'USD' }}
+            </div>
+            <div>
+                <span>Tax:</span>
+                {{ getValue('taxes') | currency: 'USD' }}
+            </div>
+            <div>
+                <span> Total:</span>
+
+                {{ getValue('total') | currency: 'USD' }}
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,21 @@
+order {
+    order-list-item {
+        margin: 1rem;
+        order-item {
+            width: 90%;
+        }
+    }
+    .summary {
+        margin-bottom: 10px;
+        span {
+            font-weight: bold;
+        }
+        > div {
+            width: 20% !important;
+        }
+    }
+    .mat-action-row {
+        text-align: end;
+        margin-right: 2em;
+    }
+}

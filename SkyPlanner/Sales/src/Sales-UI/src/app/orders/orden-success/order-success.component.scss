@@ -1,0 +1,22 @@
+order-success {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    .mat-card {
+        width: 50vh;
+        height: 50vh;
+        .big-green.mat-icon {
+            font-size: 150px;
+            margin: auto;
+            width: initial;
+            height: initial;
+            color: rgba(28, 92, 39, 0.959);
+        }
+        .box {
+            text-align: center;
+            h1 {
+                font-weight: bold !important;
+            }
+        }
+    }
+}

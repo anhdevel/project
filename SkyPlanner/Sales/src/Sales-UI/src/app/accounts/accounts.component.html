@@ -1,0 +1,97 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="formGroup">
+    <mat-card fxLayout="column" fxLayoutGap="10px">
+        <mat-toolbar color="primary" fxFlex>
+            <div
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                style="width: 100%"
+            >
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+                    <mat-form-field fxFlex>
+                        <mat-label>Select an Account</mat-label>
+                        <mat-select
+                            matTooltip="Select Account"
+                            formControlName="selectAccount"
+                            [compareWith]="compareWith"
+                        >
+                            <mat-option>-- None --</mat-option>
+                            <mat-option
+                                *ngFor="let account of accounts$ | async"
+                                [value]="account"
+                            >
+                                {{ account.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+                    <button
+                        class="add-new-order"
+                        mat-icon-button
+                        matTooltip="New Order"
+                        matTooltipPosition="above"
+                        [disabled]="hasError('selectAccount', 'required')"
+                        (click)="router.navigate(['order/news'])"
+                    >
+                        <mat-icon class="medium-icon"
+                            >add_circle_outline</mat-icon
+                        >
+                    </button>
+                </div>
+            </div>
+        </mat-toolbar>
+        <mat-divider inset="true"></mat-divider>
+        <div
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayoutGap="10px"
+            formArrayName="orders"
+        >
+            <ng-container *ngIf="!error; else serveError">
+                <ng-container
+                    *ngIf="
+                        !hasError('selectAccount', 'required');
+                        else noAccountSelect
+                    "
+                >
+                    <ng-container *ngIf="orders.length === 0">
+                        <ng-container *ngTemplateOutlet="noOrders">
+                        </ng-container>
+                    </ng-container>
+                    <div
+                        fxLayout="column"
+                        fxLayoutAlign="center stretch"
+                        *ngFor="let order of orders; let i = index"
+                    >
+                        <div
+                            fxLayout="row"
+                            fxLayoutAlign="center center"
+                            [formGroupName]="i"
+                        >
+                            <order
+                                [orderForm]="order"
+                                style="width: 100%"
+                            ></order>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="error$ | async as error"> </ng-container>
+        </div>
+    </mat-card>
+</div>
+<ng-template #noAccountSelect>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <h2>No Account Selected</h2>
+    </div>
+</ng-template>
+<ng-template #noOrders>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <h2>The selected Account dot not have Orders</h2>
+    </div>
+</ng-template>
+<ng-template #serveError>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <h2 class="style-error">Server Error</h2>
+    </div>
+</ng-template>

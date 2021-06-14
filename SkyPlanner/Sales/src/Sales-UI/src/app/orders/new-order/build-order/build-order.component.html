@@ -1,0 +1,84 @@
+<div fxLayout="column" fxLayoutGap="10px" [formGroup]="orderForm">
+    <mat-card>
+        <mat-card-title>Order</mat-card-title>
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="10px">
+                <div fxLayout="column" fxLayoutAlign="start stretch">
+                    <div fxLayout="row" fxLayoutAlign="start stretch">
+                        <mat-card class="order-list-container">
+                            <order-list-item
+                                *ngIf="!hasError('orderProducts', 'minLength')"
+                                [orderForm]="orderForm"
+                                [canDelete]="true"
+                                (orderItemQuantityChange)="
+                                    quantityChange($event)
+                                "
+                                (deleteItem)="deleteItem($event)"
+                            ></order-list-item>
+                            <ng-container
+                                *ngIf="hasError('orderProducts', 'minLength')"
+                            >
+                                <ng-container
+                                    *ngTemplateOutlet="noProducts"
+                                ></ng-container>
+                            </ng-container>
+                        </mat-card>
+                    </div>
+                    <div
+                        fxLayout="column"
+                        fxLayoutAlign="end end"
+                        class="summary"
+                    >
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="center end"
+                            fxLayoutGap="10px"
+                        >
+                            <div>
+                                <span>SubTotal:</span>
+                                {{ getValue('subTotal') | currency: 'USD' }}
+                            </div>
+                            <div>
+                                <span>Tax:</span>
+                                {{ getValue('taxes') | currency: 'USD' }}
+                            </div>
+                            <div>
+                                <span> Total:</span>
+                                {{ getValue('total') | currency: 'USD' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    fxLayout="row"
+                    fxLayoutAlign="end center"
+                    class="margin-flex-end"
+                >
+                    <ng-container
+                        *ngIf="
+                            loadingErrorMessageSelector$
+                                | async as loadingErrorMessageSelector
+                        "
+                    >
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            [disabled]="
+                                !orderForm.valid &&
+                                !loadingErrorMessageSelector.loading
+                            "
+                            (click)="save()"
+                        >
+                            Submit Order
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<ng-template #noProducts>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <h2>The Order do not Have Products</h2>
+    </div>
+</ng-template>

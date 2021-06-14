@@ -1,0 +1,28 @@
+build-order {
+    > div > .mat-card {
+        max-height: calc(100vh - 162px);
+        height: calc(100vh - 162px);
+        min-height: calc(100vh - 162px);
+    }
+    .order-list-container {
+        max-height: 48vh;
+        height: 48vh;
+        min-height: 48vh;
+        width: 100%;
+        margin-top: 40px;
+        margin-bottom: 16px;
+        overflow: auto;
+    }
+    .summary {
+        font-size: 16px;
+    }
+    .margin-flex-end {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 2em;
+    }
+    order-item {
+        width: 100%;
+    }
+    margin: 1em;
+}

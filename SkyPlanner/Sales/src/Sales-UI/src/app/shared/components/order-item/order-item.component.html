@@ -1,0 +1,45 @@
+<mat-card [formGroup]="itemFormGroup">
+    <div fxLayout="column" fxLayoutAlign="center stretch">
+        <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            formGroupName="orderProduct"
+            fxLayoutGap="10px"
+        >
+            <mat-form-field fxFlex="1.5 1 auto">
+                <mat-label>ProductName</mat-label>
+                <input matInput formControlName="name" readonly />
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Quantity</mat-label>
+                <input
+                    *ngIf="!enable"
+                    matInput
+                    type="number"
+                    formControlName="quantity"
+                    [readonly]="!enable"
+                />
+                <input
+                    *ngIf="enable"
+                    matInput
+                    type="number"
+                    formControlName="quantity"
+                />
+                <mat-error *ngIf="min('quantity')">
+                    {{ min('quantity') }}
+                </mat-error>
+                <mat-error *ngIf="max('quantity')">
+                    {{ max('quantity') }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Total</mat-label>
+                <input
+                    matInput
+                    [value]="totalValue | currency: 'USD'"
+                    readonly
+                />
+            </mat-form-field>
+        </div>
+    </div>
+</mat-card>

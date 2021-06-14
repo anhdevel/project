@@ -1,0 +1,30 @@
+<mat-accordion class="headers-align" [formGroup]="parent">
+    <mat-expansion-panel [expanded]="expandByDefault">
+        <mat-expansion-panel-header>
+            <mat-panel-title> {{ title }} </mat-panel-title>
+            <mat-panel-description *ngIf="description">
+                <ng-container
+                    *ngTemplateOutlet="description; context: { parent: parent }"
+                >
+                </ng-container>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div
+            fxLayout="column"
+            fxLayoutAlign="space-between stretch"
+            *ngIf="content"
+        >
+            <ng-container
+                *ngTemplateOutlet="content; context: { parent: parent }"
+            >
+            </ng-container>
+        </div>
+        <mat-action-row *ngIf="resume">
+            <ng-container
+                *ngTemplateOutlet="resume; context: { parent: parent }"
+            >
+            </ng-container>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
